@@ -24,6 +24,9 @@ apply plugin: "com.facebook.react"
 def getExtOrIntegerDefault(name) {
   return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["RnMlkitOcr_" + name]).toInteger()
 }
+def safeGetExt(name, fallback) {
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : fallback
+}
 
 android {
   namespace "com.rnmlkitocr"
@@ -33,6 +36,14 @@ android {
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+
+    def ocrModels = safeGetExt('ocrModels', ['all'])
+    def hasAllModels = ocrModels.contains('all')
+    buildConfigField "boolean", "HAS_LATIN", "${hasAllModels || ocrModels.contains('latin')}"
+    buildConfigField "boolean", "HAS_CHINESE", "${hasAllModels || ocrModels.contains('chinese')}"
+    buildConfigField "boolean", "HAS_DEVANAGARI", "${hasAllModels || ocrModels.contains('devanagari')}"
+    buildConfigField "boolean", "HAS_JAPANESE", "${hasAllModels || ocrModels.contains('japanese')}"
+    buildConfigField "boolean", "HAS_KOREAN", "${hasAllModels || ocrModels.contains('korean')}"
   }
 
   buildFeatures {
@@ -74,4 +85,53 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  def ocrModels = safeGetExt('ocrModels', ['all'])
+  def hasAllModels = ocrModels.contains('all')
+  def isBundled = safeGetExt('ocrUseBundled', false)
+
+  // Latin
+  if (hasAllModels || ocrModels.contains('latin')) {
+    if (isBundled) {
+      implementation 'com.google.mlkit:text-recognition:16.0.1'
+    } else {
+      implementation 'com.google.android.gms:play-services-mlkit-text-recognition:19.0.1'
+    }
+  }
+
+  // Chinese
+  if (hasAllModels || ocrModels.contains('chinese')) {
+    if (isBundled) {
+      implementation 'com.google.mlkit:text-recognition-chinese:16.0.1'
+    } else {
+      implementation 'com.google.android.gms:play-services-mlkit-text-recognition-chinese:16.0.1'
+    }
+  }
+
+  // Devanagari
+  if (hasAllModels || ocrModels.contains('devanagari')) {
+    if (isBundled) {
+      implementation 'com.google.mlkit:text-recognition-devanagari:16.0.1'
+    } else {
+      implementation 'com.google.android.gms:play-services-mlkit-text-recognition-devanagari:16.0.1'
+    }
+  }
+
+  // Japanese
+  if (hasAllModels || ocrModels.contains('japanese')) {
+    if (isBundled) {
+      implementation 'com.google.mlkit:text-recognition-japanese:16.0.1'
+    } else {
+      implementation 'com.google.android.gms:play-services-mlkit-text-recognition-japanese:16.0.1'
+    }
+  }
+
+  // Korean
+  if (hasAllModels || ocrModels.contains('korean')) {
+    if (isBundled) {
+      implementation 'com.google.mlkit:text-recognition-korean:16.0.1'
+    } else {
+      implementation 'com.google.android.gms:play-services-mlkit-text-recognition-korean:16.0.1'
+    }
+  }
 }

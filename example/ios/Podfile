@@ -1,13 +1,15 @@
 ENV['RCT_NEW_ARCH_ENABLED'] = '1'
 
-# Resolve react_native_pods.rb with node to allow for hoisting
+
+
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
     "react-native/scripts/react_native_pods.rb",
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-platform :ios, min_ios_version_supported
+# platform :ios, min_ios_version_supported
+platform :ios, '15.5'
 prepare_react_native_project!
 
 linkage = ENV['USE_FRAMEWORKS']
@@ -33,5 +35,11 @@ target 'RnMlkitOcrExample' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+    installer.pods_project.targets.each do |target|
+      # Disable arm64 for simulator to avoid MLKit linking issues
+      target.build_configurations.each do |config|
+        config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      end
+    end
   end
 end

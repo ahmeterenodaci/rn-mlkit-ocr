@@ -1,7 +1,20 @@
-import { TurboModuleRegistry, type TurboModule } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
-export interface Spec extends TurboModule {
-  multiply(a: number, b: number): number;
-}
+const LINKING_ERROR =
+  `The package 'rn-mlkit-ocr' doesn't seem to be linked. Make sure: \n\n` +
+  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
+  '- You rebuilt the app after installing the package\n' +
+  '- You are not using Expo Go\n';
 
-export default TurboModuleRegistry.getEnforcing<Spec>('RnMlkitOcr');
+const RnMlkitOcr = NativeModules.RnMlkitOcr
+  ? NativeModules.RnMlkitOcr
+  : new Proxy(
+      {},
+      {
+        get() {
+          throw new Error(LINKING_ERROR);
+        },
+      }
+    );
+
+export default RnMlkitOcr;

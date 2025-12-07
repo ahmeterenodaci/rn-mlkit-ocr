@@ -1,0 +1,5 @@
+{
+  "name": "rn-mlkit-ocr-plugin",
+  "version": "1.0.0",
+  "main": "build/index.js"
+}
