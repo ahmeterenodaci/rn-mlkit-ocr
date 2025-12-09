@@ -12,8 +12,8 @@ A powerful React Native OCR (Optical Character Recognition) module powered by Go
 
 ## Requirements
 
-- iOS 15.5+
-- Android API 21+
+- iOS 15.5+ (Note: ML Kit iOS APIs run only on 64-bit devices.)
+- Android API 23+
 
 ## Installation
 
