@@ -1,6 +1,6 @@
 {
   "name": "rn-mlkit-ocr",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A powerful React Native OCR (Optical Character Recognition) module powered by Google ML Kit. Supports multiple languages and scripts with selective model loading for optimized app size.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
