@@ -2,7 +2,7 @@ require "json"
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
-selected_subspecs = defined?($ReactNativeOcrSubspecs) ? $ReactNativeOcrSubspecs : ['Latin', 'Chinese', 'Devanagari', 'Japanese', 'Korean']
+selected_subspecs = defined?($ReactNativeOcrSubspecs) ? $ReactNativeOcrSubspecs : ['latin', 'chinese', 'devanagari', 'japanese', 'korean']
 
 
 Pod::Spec.new do |s|
@@ -20,19 +20,19 @@ Pod::Spec.new do |s|
 
   s.dependency "React-Core"
 
-  if selected_subspecs.include?('Latin')
+  if selected_subspecs.include?('latin')
     s.dependency 'GoogleMLKit/TextRecognition', '3.2.0'
   end
-  if selected_subspecs.include?('Chinese')
+  if selected_subspecs.include?('chinese')
     s.dependency 'GoogleMLKit/TextRecognitionChinese', '3.2.0'
   end
-  if selected_subspecs.include?('Devanagari')
+  if selected_subspecs.include?('devanagari')
     s.dependency 'GoogleMLKit/TextRecognitionDevanagari', '3.2.0'
   end
-  if selected_subspecs.include?('Japanese')
+  if selected_subspecs.include?('japanese')
     s.dependency 'GoogleMLKit/TextRecognitionJapanese', '3.2.0'
   end
-  if selected_subspecs.include?('Korean')
+  if selected_subspecs.include?('korean')
     s.dependency 'GoogleMLKit/TextRecognitionKorean', '3.2.0'
   end
 end

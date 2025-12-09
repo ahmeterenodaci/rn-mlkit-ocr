@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { recognizeText, getAvailableLanguages } from 'rn-mlkit-ocr';
+import MlkitOcr from 'rn-mlkit-ocr';
 import type { OcrResult, DetectorType } from 'rn-mlkit-ocr';
 
 const imageUrl =
@@ -21,7 +21,7 @@ export default function App() {
   useEffect(() => {
     const fetchLanguages = async () => {
       try {
-        const langs = await getAvailableLanguages();
+        const langs = await MlkitOcr.getAvailableLanguages();
         setAvailableLanguages(langs);
       } catch (error) {
         console.error('Error loading languages:', error);
@@ -38,7 +38,10 @@ export default function App() {
     setOcrResult('');
 
     try {
-      const result: OcrResult = await recognizeText(imageUrl, detectorType);
+      const result: OcrResult = await MlkitOcr.recognizeText(
+        imageUrl,
+        detectorType
+      );
       setOcrResult(result.text);
     } catch (error) {
       console.error('OCR Error:', error);

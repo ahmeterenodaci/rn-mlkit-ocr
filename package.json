@@ -48,7 +48,25 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "typescript",
+    "ocr",
+    "text-recognition",
+    "mlkit",
+    "ocr-recognition",
+    "react-native-library",
+    "expo",
+    "react-native-ocr",
+    "react-native-module",
+    "google-ml-kit",
+    "text-recognition-from-image",
+    "mlkit-text-recognition",
+    "expo-modules",
+    "google-ml-kit-text-recongnition",
+    "expo-module",
+    "react-native-new-architecture",
+    "on-device-ocr",
+    "rn-mlkit-ocr"
   ],
   "repository": {
     "type": "git",

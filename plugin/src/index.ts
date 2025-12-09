@@ -61,11 +61,11 @@ function setPodfileProperties(podfile: string, props: Props): string {
   let models: string[] = [];
 
   if (!ocrModels || ocrModels.includes('all')) {
-    models = ['Latin', 'Chinese', 'Devanagari', 'Japanese', 'Korean'];
+    models = ['latin', 'chinese', 'devanagari', 'japanese', 'korean'];
   } else {
     models = ocrModels.map((m) => m.charAt(0).toUpperCase() + m.slice(1));
-    if (!models.includes('Latin')) {
-      models.push('Latin');
+    if (!models.includes('latin')) {
+      models.push('latin');
     }
   }
 

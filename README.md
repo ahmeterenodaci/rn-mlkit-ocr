@@ -52,7 +52,7 @@ Add the plugin to your `app.json` or `app.config.js`:
       [
         "rn-mlkit-ocr",
         {
-          "ocrModels": ["latin", "chinese"],
+          "ocrModels": ["latin", "chinese", "devanagari", "japanese", "korean"],
           "ocrUseBundled": true
         }
       ]
@@ -71,7 +71,7 @@ Add the following to your `android/build.gradle` file inside the `buildscript { 
 buildscript {
     ext {
         // ... other configurations
-        ocrModels = ["latin", "chinese"]
+        ocrModels = ["latin", "chinese", "devanagari", "japanese", "korean"]
         ocrUseBundled = true
     }
 }
@@ -83,7 +83,7 @@ Add the following to your `ios/Podfile` before the `use_react_native!` call:
 
 ```ruby
 # --- RN-MLKIT-OCR CONFIG ---
-$ReactNativeOcrSubspecs = ['Latin', 'Chinese']
+$ReactNativeOcrSubspecs = ['latin', 'chinese', 'devanagari', 'japanese', 'korean']
 # --- END RN-MLKIT-OCR CONFIG ---
 ```
 
@@ -102,12 +102,12 @@ $ReactNativeOcrSubspecs = ['Latin', 'Chinese']
 ### Basic Text Recognition
 
 ```typescript
-import { recognizeText } from 'rn-mlkit-ocr';
+import MlkitOcr from 'rn-mlkit-ocr';
 
-const imageUri = 'file:///path/to/image.jpg'; // or 'https://...'
+const imageUri = 'file:///path/to/image.jpg'; // Local image or link
 
 try {
-  const result = await recognizeText(imageUri);
+  const result = await MlkitOcr.recognizeText(imageUri);
   console.log('Recognized text:', result.text);
 
   // Access detailed information
@@ -128,23 +128,23 @@ try {
 ### Using Specific Language Models
 
 ```typescript
-import { recognizeText } from 'rn-mlkit-ocr';
+import MlkitOcr from 'rn-mlkit-ocr';
 
 // Recognize Chinese text
-const result = await recognizeText(imageUri, 'chinese');
+const result = await MlkitOcr.recognizeText(imageUri, 'chinese');
 
 // Recognize Japanese text
-const result = await recognizeText(imageUri, 'japanese');
+const result = await MlkitOcr.recognizeText(imageUri, 'japanese');
 ```
 
 ### Getting Available Languages
 
 ```typescript
-import { getAvailableLanguages } from 'rn-mlkit-ocr';
+import MlkitOcr from 'rn-mlkit-ocr';
 
-const languages = await getAvailableLanguages();
+const languages = await MlkitOcr.getAvailableLanguages();
 console.log('Available languages:', languages);
-// Output: ['latin', 'chinese']
+// Output: ['latin', 'chinese', 'devanagari', 'japanese', 'korean']
 ```
 
 ## API Reference
