@@ -10,6 +10,14 @@ A powerful React Native OCR (Optical Character Recognition) module powered by Go
 - 🔄 **Flexible deployment**: Choose between bundled models (offline) or unbundled models (download on demand)
 - 📱 **Cross-platform**: Works on both iOS and Android
 
+<table>
+	<tr>
+		<td>
+			Don't forget to hit the star ⭐ button
+		</td>
+	</tr>
+</table>
+
 ## Requirements
 
 - iOS 15.5+ (Note: ML Kit iOS APIs run only on 64-bit devices.)
