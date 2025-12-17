@@ -229,6 +229,66 @@ yarn ios
 yarn android
 ```
 
+## Troubleshooting
+
+### iOS: Deployment Target Error
+
+If you encounter this error when running `pod install`:
+
+```
+command `pod install` failed.
+
+└─ Cause: CocoaPods could not find compatible versions for pod "RnMlkitOcr":
+  In Podfile:
+    RnMlkitOcr (from `../node_modules/rn-mlkit-ocr`)
+
+Specs satisfying the `RnMlkitOcr (from `../node_modules/rn-mlkit-ocr`)` 
+dependency were found, but they required a higher minimum deployment target.
+```
+
+**Cause:** This package requires iOS 15.5 or higher as minimum deployment target.
+
+**Solution 1: For Expo Projects (Recommended)**
+
+Install and configure `expo-build-properties`:
+
+```bash
+npx expo install expo-build-properties
+```
+
+Add to your `app.json` or `app.config.js`:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "15.5"
+          }
+        }
+      ]
+    ]
+  }
+}
+```
+
+**Solution 2: For React Native CLI Projects**
+
+Update your `ios/Podfile`:
+
+```ruby
+platform :ios, '15.5'  # Update this line
+```
+
+Then run:
+
+```bash
+cd ios && pod install
+```
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
