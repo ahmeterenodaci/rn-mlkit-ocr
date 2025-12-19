@@ -242,7 +242,7 @@ command `pod install` failed.
   In Podfile:
     RnMlkitOcr (from `../node_modules/rn-mlkit-ocr`)
 
-Specs satisfying the `RnMlkitOcr (from `../node_modules/rn-mlkit-ocr`)` 
+Specs satisfying the `RnMlkitOcr (from `../node_modules/rn-mlkit-ocr`)`
 dependency were found, but they required a higher minimum deployment target.
 ```
 
@@ -281,6 +281,39 @@ Update your `ios/Podfile`:
 
 ```ruby
 platform :ios, '15.5'  # Update this line
+```
+
+Then run:
+
+```bash
+cd ios && pod install
+```
+
+### iOS: Architecture Mismatch Error
+
+If you encounter this error when building for iOS simulator:
+
+```
+building for 'iOS-simulator', but linking in object file
+(.../Pods/MLImage/Frameworks/MLImage.framework/MLImage[arm64][2](...))
+built for 'iOS'
+```
+
+**Cause:** This occurs when the ML Kit framework includes arm64 architecture for device but you're building for the simulator.
+
+**Solution:**
+
+Add the following to your `ios/Podfile` inside the `post_install` hook:
+
+```ruby
+post_install do |installer|
+  # ... other configurations
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = "arm64"
+    end
+  end
+end
 ```
 
 Then run:
