@@ -21,18 +21,18 @@ Pod::Spec.new do |s|
   s.dependency "React-Core"
 
   if selected_subspecs.include?('latin')
-    s.dependency 'GoogleMLKit/TextRecognition', '3.2.0'
+    s.dependency 'GoogleMLKit/TextRecognition', '9.0.0'
   end
   if selected_subspecs.include?('chinese')
-    s.dependency 'GoogleMLKit/TextRecognitionChinese', '3.2.0'
+    s.dependency 'GoogleMLKit/TextRecognitionChinese', '9.0.0'
   end
   if selected_subspecs.include?('devanagari')
-    s.dependency 'GoogleMLKit/TextRecognitionDevanagari', '3.2.0'
+    s.dependency 'GoogleMLKit/TextRecognitionDevanagari', '9.0.0'
   end
   if selected_subspecs.include?('japanese')
-    s.dependency 'GoogleMLKit/TextRecognitionJapanese', '3.2.0'
+    s.dependency 'GoogleMLKit/TextRecognitionJapanese', '9.0.0'
   end
   if selected_subspecs.include?('korean')
-    s.dependency 'GoogleMLKit/TextRecognitionKorean', '3.2.0'
+    s.dependency 'GoogleMLKit/TextRecognitionKorean', '9.0.0'
   end
 end
