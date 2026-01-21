@@ -1,8 +1,5 @@
-import {
-  type ConfigPlugin,
-  withProjectBuildGradle,
-  withPodfile,
-} from '@expo/config-plugins';
+import type { ConfigPlugin } from '@expo/config-plugins';
+import { withProjectBuildGradle, withPodfile } from '@expo/config-plugins';
 
 interface Props {
   ocrModels?: string[];
