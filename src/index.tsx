@@ -48,7 +48,17 @@ export function getAvailableLanguages(): Promise<DetectorType[]> {
   return RnMlkitOcr.getAvailableLanguages();
 }
 
-export default {
+export interface MlkitOcrModule {
+  recognizeText: (
+    imageUri: string,
+    detectorType?: DetectorType
+  ) => Promise<OcrResult>;
+  getAvailableLanguages: () => Promise<DetectorType[]>;
+}
+
+const MlkitOcr: MlkitOcrModule = {
   recognizeText,
   getAvailableLanguages,
 };
+
+export default MlkitOcr;
