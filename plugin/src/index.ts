@@ -88,7 +88,3 @@ function setPodfileProperties(podfile: string, props: Props): string {
 }
 
 export default withMlKitConfig;
-
-// Add CommonJS compatibility for Expo
-module.exports = withMlKitConfig;
-module.exports.default = withMlKitConfig;
